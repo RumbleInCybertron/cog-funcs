@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MBTI Cognitive Functions - Interactive</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    h1 { color: #333; }
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .button {
+      flex: 1 1 22%;
+      padding: 15px 20px;
+      margin: 5px;
+      background-color: #333;
+      color: white;
+      border: none;
+      cursor: pointer;
+      text-align: center;
+      font-size: 14px;
+      min-width: 150px;
+    }
+    .button:hover { background-color: #555; }
+    .formula, .steps { margin-top: 20px; }
+    .step { margin: 10px 0; }
+    .functions-table { margin-top: 20px; overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 10px; text-align: left; border-bottom: 1px solid #ddd; }
+    th { background-color: #f4f4f4; }
+    @media (max-width: 768px) {
+      .button {
+        font-size: 12px;
+        flex: 1 1 45%;
+      }
+    }
+    #debugMessage {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>MBTI Cognitive Functions</h1>
+  <div class="buttons">
+    <button class="button" id="INTJ">INTJ</button>
+    <button class="button" id="ENTP">ENTP</button>
+    <button class="button" id="ISFJ">ISFJ</button>
+    <button class="button" id="ISFP">ISFP</button>
+    <button class="button" id="INFJ">INFJ</button>
+    <button class="button" id="INFP">INFP</button>
+    <button class="button" id="ESTJ">ESTJ</button>
+    <button class="button" id="ESTP">ESTP</button>
+    <button class="button" id="ESFJ">ESFJ</button>
+    <button class="button" id="ESFP">ESFP</button>
+    <button class="button" id="INTP">INTP</button>
+    <button class="button" id="ENTJ">ENTJ</button>
+    <button class="button" id="ENFP">ENFP</button>
+    <button class="button" id="ENFJ">ENFJ</button>
+    <button class="button" id="ISTJ">ISTJ</button>
+    <button class="button" id="ISTP">ISTP</button>
+  </div>
+
+  <div class="steps" id="steps">
+    <!-- Steps will be dynamically filled here -->
+  </div>
+
+  <div class="functions-table" id="functionsTable" style="display:none;">
+    <h2>Top 4 Functions</h2>
+    <table>
+      <tr>
+        <th>Function</th>
+        <th>Explanation</th>
+        <th>Beebe's Name</th>
+      </tr>
+      <tr>
+        <td id="dominantFunction">Ni</td>
+        <td>Focuses on internal visions and insights</td>
+        <td>Dominant</td>
+      </tr>
+      <tr>
+        <td id="auxiliaryFunction">Te</td>
+        <td>Organizes and structures the external world</td>
+        <td>Auxiliary</td>
+      </tr>
+      <tr>
+        <td id="tertiaryFunction">Fi</td>
+        <td>Evaluates the world based on internal values</td>
+        <td>Tertiary</td>
+      </tr>
+      <tr>
+        <td id="inferiorFunction">Se</td>
+        <td>Takes in immediate sensory data from the world</td>
+        <td>Inferior</td>
+      </tr>
+    </table>
+
+    <h2>Shadow Functions</h2>
+    <table>
+      <tr>
+        <th>Function</th>
+        <th>Explanation</th>
+        <th>Beebe's Name</th>
+      </tr>
+      <tr>
+        <td id="opposingFunction">Ne</td>
+        <td>Seeks possibilities, patterns, and connections externally</td>
+        <td>Opposing</td>
+      </tr>
+      <tr>
+        <td id="criticalParent">Ti</td>
+        <td>Analyzes the world based on internal logic</td>
+        <td>Critical Parent</td>
+      </tr>
+      <tr>
+        <td id="trickster">Fe</td>
+        <td>Considers external emotions and social dynamics</td>
+        <td>Trickster</td>
+      </tr>
+      <tr>
+        <td id="demon">Si</td>
+        <td>Remembers past experiences and draws on sensory memory</td>
+        <td>Demon</td>
+      </tr>
+    </table>
+  </div>
+
+  <script>
+    const functionMap = {
+      "INTJ": {
+        steps: [
+          "Step 1: I (Introverted) → Dominant function = Ni (Introverted Intuition)",
+          "Step 2: N (Intuition) → Dominant function = Ni (Auxiliary will be Te, the extraverted counterpart of Intuition)",
+          "Step 3: Tertiary Function = Fi (Introverted Feeling), opposite attitude of Dominant",
+          "Step 4: Inferior Function = Se (Extraverted Sensing), opposite attitude of Auxiliary",
+          "Step 5: Shadow Functions derived as follows:",
+          "Opposing Function: Ne (Extraverted Intuition), opposite attitude of Dominant",
+          "Critical Parent: Ti (Introverted Thinking), opposite attitude of Auxiliary",
+          "Trickster: Fe (Extraverted Feeling), opposite attitude of Tertiary",
+          "Demon: Si (Introverted Sensing), opposite attitude of Inferior"
+        ],
+        functions: {
+          dominant: "Ni",
+          auxiliary: "Te",
+          tertiary: "Fi",
+          inferior: "Se",
+          opposing: "Ne",
+          criticalParent: "Ti",
+          trickster: "Fe",
+          demon: "Si"
+        }
+      },
+      "ENTP": {
+        steps: [
+          "Step 1: E (Extraverted) → Dominant function = Ne (Extraverted Intuition)",
+          "Step 2: N (Intuition) → Dominant function = Ne (Auxiliary will be Ti, the introverted counterpart of Intuition)",
+          "Step 3: Tertiary Function = Fe (Extraverted Feeling), opposite attitude of Dominant",
+          "Step 4: Inferior Function = Si (Introverted Sensing), opposite attitude of Auxiliary",
+          "Step 5: Shadow Functions derived as follows:",
+          "Opposing Function: Ni (Introverted Intuition), opposite attitude of Dominant",
+          "Critical Parent: Te (Extraverted Thinking), opposite attitude of Auxiliary",
+          "Trickster: Fi (Introverted Feeling), opposite attitude of Tertiary",
+          "Demon: Se (Extraverted Sensing), opposite attitude of Inferior"
+        ],
+        functions: {
+          dominant: "Ne",
+          auxiliary: "Ti",
+          tertiary: "Fe",
+          inferior: "Si",
+          opposing: "Ni",
+          criticalParent: "Te",
+          trickster: "Fi",
+          demon: "Se"
+        }
+      },
+      "ISFJ": {
+    steps: [
+      "Step 1: I (Introverted) → Dominant function = Si (Introverted Sensing)",
+      "Step 2: S (Sensing) → Dominant function = Si (Auxiliary will be Fe, the extraverted counterpart of Sensing)",
+      "Step 3: Tertiary Function = Ti (Introverted Thinking), opposite attitude of Dominant",
+      "Step 4: Inferior Function = Ne (Extraverted Intuition), opposite attitude of Auxiliary",
+      "Step 5: Shadow Functions derived as follows:",
+      "Opposing Function: Ni (Introverted Intuition), opposite attitude of Dominant",
+      "Critical Parent: Te (Extraverted Thinking), opposite attitude of Auxiliary",
+      "Trickster: Fi (Introverted Feeling), opposite attitude of Tertiary",
+      "Demon: Se (Extraverted Sensing), opposite attitude of Inferior"
+    ],
+    functions: {
+      dominant: "Si",
+      auxiliary: "Fe",
+      tertiary: "Ti",
+      inferior: "Ne",
+      opposing: "Ni",
+      criticalParent: "Te",
+      trickster: "Fi",
+      demon: "Se"
+    }
+  },
+      "ISFP": {
+        steps: [
+          "Step 1: I (Introverted) → Dominant function = Fi (Introverted Feeling)",
+          "Step 2: F (Feeling) → Dominant function = Fi (Auxiliary will be Se, the extraverted counterpart of Feeling)",
+          "Step 3: Tertiary Function = Te (Extraverted Thinking), opposite attitude of Dominant",
+          "Step 4: Inferior Function = Ni (Introverted Intuition), opposite attitude of Auxiliary",
+          "Step 5: Shadow Functions derived as follows:",
+          "Opposing Function: Fe (Extraverted Feeling), opposite attitude of Dominant",
+          "Critical Parent: Si (Introverted Sensing), opposite attitude of Auxiliary",
+          "Trickster: Ti (Introverted Thinking), opposite attitude of Tertiary",
+          "Demon: Ne (Extraverted Intuition), opposite attitude of Inferior"
+        ],
+        functions: {
+          dominant: "Fi",
+          auxiliary: "Se",
+          tertiary: "Te",
+          inferior: "Ni",
+          opposing: "Fe",
+          criticalParent: "Si",
+          trickster: "Ti",
+          demon: "Ne"
+        }
+      },
+      "INFJ": {
+        steps: [
+          "Step 1: I (Introverted) → Dominant function = Ni (Introverted Intuition)",
+          "Step 2: N (Intuition) → Dominant function = Ni (Auxiliary will be Fe, the extraverted counterpart of Intuition)",
+          "Step 3: Tertiary Function = Ti (Introverted Thinking), opposite attitude of Dominant",
+          "Step 4: Inferior Function = Se (Extraverted Sensing), opposite attitude of Auxiliary",
+          "Step 5: Shadow Functions derived as follows:",
+          "Opposing Function: Ne (Extraverted Intuition), opposite attitude of Dominant",
+          "Critical Parent: Te (Extraverted Thinking), opposite attitude of Auxiliary",
+          "Trickster: Fi (Introverted Feeling), opposite attitude of Tertiary",
+          "Demon: Si (Introverted Sensing), opposite attitude of Inferior"
+        ],
+        functions: {
+          dominant: "Ni",
+          auxiliary: "Fe",
+          tertiary: "Ti",
+          inferior: "Se",
+          opposing: "Ne",
+          criticalParent: "Te",
+          trickster: "Fi",
+          demon: "Si"
+        }
+      },
+      "INFP": {
+        steps: [
+          "Step 1: I (Introverted) → Dominant function = Fi (Introverted Feeling)",
+          "Step 2: F (Feeling) → Dominant function = Fi (Auxiliary will be Ne, the extraverted counterpart of Feeling)",
+          "Step 3: Tertiary Function = Te (Extraverted Thinking), opposite attitude of Dominant",
+          "Step 4: Inferior Function = Si (Introverted Sensing), opposite attitude of Auxiliary",
+          "Step 5: Shadow Functions derived as follows:",
+          "Opposing Function: Fe (Extraverted Feeling), opposite attitude of Dominant",
+          "Critical Parent: Ni (Introverted Intuition), opposite attitude of Auxiliary",
+          "Trickster: Ti (Introverted Thinking), opposite attitude of Tertiary",
+          "Demon: Se (Extraverted Sensing), opposite attitude of Inferior"
+        ],
+        functions: {
+          dominant: "Fi",
+          auxiliary: "Ne",
+          tertiary: "Te",
+          inferior: "Si",
+          opposing: "Fe",
+          criticalParent: "Ni",
+          trickster: "Ti",
+          demon: "Se"
+        }
+      },
+      "ESTJ": {
+        steps: [
+          "Step 1: E (Extraverted) → Dominant function = Te (Extraverted Thinking)",
+          "Step 2: T (Thinking) → Dominant function = Te (Auxiliary will be Si, the introverted counterpart of Thinking)",
+          "Step 3: Tertiary Function = Ne (Extraverted Intuition), opposite attitude of Dominant",
+          "Step 4: Inferior Function = Fi (Introverted Feeling), opposite attitude of Auxiliary",
+          "Step 5: Shadow Functions derived as follows:",
+          "Opposing Function: Ti (Introverted Thinking), opposite attitude of Dominant",
+          "Critical Parent: Fe (Extraverted Feeling), opposite attitude of Auxiliary",
+          "Trickster: Si (Introverted Sensing), opposite attitude of Tertiary",
+          "Demon: Ne (Extraverted Intuition), opposite attitude of Inferior"
+        ],
+        functions: {
+          dominant: "Te",
+          auxiliary: "Si",
+          tertiary: "Ne",
+          inferior: "Fi",
+          opposing: "Ti",
+          criticalParent: "Fe",
+          trickster: "Si",
+          demon: "Ne"
+        }
+      },
+      "ESTP": {
+        steps: [
+          "Step 1: E (Extraverted) → Dominant function = Se (Extraverted Sensing)",
+          "Step 2: S (Sensing) → Dominant function = Se (Auxiliary will be Ti, the introverted counterpart of Sensing)",
+          "Step 3: Tertiary Function = Fe (Extraverted Feeling), opposite attitude of Dominant",
+          "Step 4: Inferior Function = Ni (Introverted Intuition), opposite attitude of Auxiliary",
+          "Step 5: Shadow Functions derived as follows:",
+          "Opposing Function: Si (Introverted Sensing), opposite attitude of Dominant",
+          "Critical Parent: Te (Extraverted Thinking), opposite attitude of Auxiliary",
+          "Trickster: Fi (Introverted Feeling), opposite attitude of Tertiary",
+          "Demon: Ne (Extraverted Intuition), opposite attitude of Inferior"
+        ],
+        functions: {
+          dominant: "Se",
+          auxiliary: "Ti",
+          tertiary: "Fe",
+          inferior: "Ni",
+          opposing: "Si",
+          criticalParent: "Te",
+          trickster: "Fi",
+          demon: "Ne"
+        }
+      },
+      "ESFJ": {
+        steps: [
+          "Step 1: E (Extraverted) → Dominant function = Fe (Extraverted Feeling)",
+          "Step 2: F (Feeling) → Dominant function = Fe (Auxiliary will be Si, the introverted counterpart of Feeling)",
+          "Step 3: Tertiary Function = Ne (Extraverted Intuition), opposite attitude of Dominant",
+          "Step 4: Inferior Function = Ti (Introverted Thinking), opposite attitude of Auxiliary",
+          "Step 5: Shadow Functions derived as follows:",
+          "Opposing Function: Fi (Introverted Feeling), opposite attitude of Dominant",
+          "Critical Parent: Te (Extraverted Thinking), opposite attitude of Auxiliary",
+          "Trickster: Si (Introverted Sensing), opposite attitude of Tertiary",
+          "Demon: Ne (Extraverted Intuition), opposite attitude of Inferior"
+        ],
+        functions: {
+          dominant: "Fe",
+          auxiliary: "Si",
+          tertiary: "Ne",
+          inferior: "Ti",
+          opposing: "Fi",
+          criticalParent: "Te",
+          trickster: "Si",
+          demon: "Ne"
+        }
+      },
+      "ESFP": {
+        steps: [
+          "Step 1: E (Extraverted) → Dominant function = Se (Extraverted Sensing)",
+          "Step 2: S (Sensing) → Dominant function = Se (Auxiliary will be Fi, the introverted counterpart of Sensing)",
+          "Step 3: Tertiary Function = Te (Extraverted Thinking), opposite attitude of Dominant",
+          "Step 4: Inferior Function = Ni (Introverted Intuition), opposite attitude of Auxiliary",
+          "Step 5: Shadow Functions derived as follows:",
+          "Opposing Function: Si (Introverted Sensing), opposite attitude of Dominant",
+          "Critical Parent: Ti (Introverted Thinking), opposite attitude of Auxiliary",
+          "Trickster: Fe (Extraverted Feeling), opposite attitude of Tertiary",
+          "Demon: Ne (Extraverted Intuition), opposite attitude of Inferior"
+        ],
+        functions: {
+          dominant: "Se",
+          auxiliary: "Fi",
+          tertiary: "Te",
+          inferior: "Ni",
+          opposing: "Si",
+          criticalParent: "Ti",
+          trickster: "Fe",
+          demon: "Ne"
+        }
+      },
+      "ENFJ": {
+        steps: [
+          "Step 1: E (Extraverted) → Dominant function = Fe (Extraverted Feeling)",
+          "Step 2: F (Feeling) → Dominant function = Fe (Auxiliary will be Ni, the introverted counterpart of Feeling)",
+          "Step 3: Tertiary Function = Ti (Introverted Thinking), opposite attitude of Dominant",
+          "Step 4: Inferior Function = Se (Extraverted Sensing), opposite attitude of Auxiliary",
+          "Step 5: Shadow Functions derived as follows:",
+          "Opposing Function: Fi (Introverted Feeling), opposite attitude of Dominant",
+          "Critical Parent: Te (Extraverted Thinking), opposite attitude of Auxiliary",
+          "Trickster: Si (Introverted Sensing), opposite attitude of Tertiary",
+          "Demon: Ne (Extraverted Intuition), opposite attitude of Inferior"
+        ],
+        functions: {
+          dominant: "Fe",
+          auxiliary: "Ni",
+          tertiary: "Ti",
+          inferior: "Se",
+          opposing: "Fi",
+          criticalParent: "Te",
+          trickster: "Si",
+          demon: "Ne"
+        }
+      },
+      "ISTJ": {
+        steps: [
+          "Step 1: I (Introverted) → Dominant function = Si (Introverted Sensing)",
+          "Step 2: S (Sensing) → Dominant function = Si (Auxiliary will be Te, the extraverted counterpart of Sensing)",
+          "Step 3: Tertiary Function = Fi (Introverted Feeling), opposite attitude of Dominant",
+          "Step 4: Inferior Function = Ne (Extraverted Intuition), opposite attitude of Auxiliary",
+          "Step 5: Shadow Functions derived as follows:",
+          "Opposing Function: Ni (Introverted Intuition), opposite attitude of Dominant",
+          "Critical Parent: Fe (Extraverted Feeling), opposite attitude of Auxiliary",
+          "Trickster: Ti (Introverted Thinking), opposite attitude of Tertiary",
+          "Demon: Se (Extraverted Sensing), opposite attitude of Inferior"
+        ],
+        functions: {
+          dominant: "Si",
+          auxiliary: "Te",
+          tertiary: "Fi",
+          inferior: "Ne",
+          opposing: "Ni",
+          criticalParent: "Fe",
+          trickster: "Ti",
+          demon: "Se"
+        }
+      },
+      "ISTP": {
+        steps: [
+          "Step 1: I (Introverted) → Dominant function = Ti (Introverted Thinking)",
+          "Step 2: T (Thinking) → Dominant function = Ti (Auxiliary will be Se, the extraverted counterpart of Thinking)",
+          "Step 3: Tertiary Function = Ni (Introverted Intuition), opposite attitude of Dominant",
+          "Step 4: Inferior Function = Fe (Extraverted Feeling), opposite attitude of Auxiliary",
+          "Step 5: Shadow Functions derived as follows:",
+          "Opposing Function: Te (Extraverted Thinking), opposite attitude of Dominant",
+          "Critical Parent: Si (Introverted Sensing), opposite attitude of Auxiliary",
+          "Trickster: Fi (Introverted Feeling), opposite attitude of Tertiary",
+          "Demon: Ne (Extraverted Intuition), opposite attitude of Inferior"
+        ],
+        functions: {
+          dominant: "Ti",
+          auxiliary: "Se",
+          tertiary: "Ni",
+          inferior: "Fe",
+          opposing: "Te",
+          criticalParent: "Si",
+          trickster: "Fi",
+          demon: "Ne"
+        }
+      },
+      "INTP": {
+        steps: [
+          "Step 1: I (Introverted) → Dominant function = Ti (Introverted Thinking)",
+          "Step 2: T (Thinking) → Dominant function = Ti (Auxiliary will be Ne, the extraverted counterpart of Thinking)",
+          "Step 3: Tertiary Function = Si (Introverted Sensing), opposite attitude of Dominant",
+          "Step 4: Inferior Function = Fe (Extraverted Feeling), opposite attitude of Auxiliary",
+          "Step 5: Shadow Functions derived as follows:",
+          "Opposing Function: Te (Extraverted Thinking), opposite attitude of Dominant",
+          "Critical Parent: Ni (Introverted Intuition), opposite attitude of Auxiliary",
+          "Trickster: Fi (Introverted Feeling), opposite attitude of Tertiary",
+          "Demon: Se (Extraverted Sensing), opposite attitude of Inferior"
+        ],
+        functions: {
+          dominant: "Ti",
+          auxiliary: "Ne",
+          tertiary: "Si",
+          inferior: "Fe",
+          opposing: "Te",
+          criticalParent: "Ni",
+          trickster: "Fi",
+          demon: "Se"
+        }
+      },
+      "ENTJ": {
+        steps: [
+          "Step 1: E (Extraverted) → Dominant function = Te (Extraverted Thinking)",
+          "Step 2: T (Thinking) → Dominant function = Te (Auxiliary will be Ni, the introverted counterpart of Thinking)",
+          "Step 3: Tertiary Function = Se (Extraverted Sensing), opposite attitude of Dominant",
+          "Step 4: Inferior Function = Fi (Introverted Feeling), opposite attitude of Auxiliary",
+          "Step 5: Shadow Functions derived as follows:",
+          "Opposing Function: Ti (Introverted Thinking), opposite attitude of Dominant",
+          "Critical Parent: Fe (Extraverted Feeling), opposite attitude of Auxiliary",
+          "Trickster: Si (Introverted Sensing), opposite attitude of Tertiary",
+          "Demon: Ne (Extraverted Intuition), opposite attitude of Inferior"
+        ],
+        functions: {
+          dominant: "Te",
+          auxiliary: "Ni",
+          tertiary: "Se",
+          inferior: "Fi",
+          opposing: "Ti",
+          criticalParent: "Fe",
+          trickster: "Si",
+          demon: "Ne"
+        }
+      },
+      "ENFP": {
+        steps: [
+          "Step 1: E (Extraverted) → Dominant function = Ne (Extraverted Intuition)",
+          "Step 2: N (Intuition) → Dominant function = Ne (Auxiliary will be Fi, the introverted counterpart of Intuition)",
+          "Step 3: Tertiary Function = Te (Extraverted Thinking), opposite attitude of Dominant",
+          "Step 4: Inferior Function = Si (Introverted Sensing), opposite attitude of Auxiliary",
+          "Step 5: Shadow Functions derived as follows:",
+          "Opposing Function: Ni (Introverted Intuition), opposite attitude of Dominant",
+          "Critical Parent: Ti (Introverted Thinking), opposite attitude of Auxiliary",
+          "Trickster: Fe (Extraverted Feeling), opposite attitude of Tertiary",
+          "Demon: Se (Extraverted Sensing), opposite attitude of Inferior"
+        ],
+        functions: {
+          dominant: "Ne",
+          auxiliary: "Fi",
+          tertiary: "Te",
+          inferior: "Si",
+          opposing: "Ni",
+          criticalParent: "Ti",
+          trickster: "Fe",
+          demon: "Se"
+        }
+      },
+    };
+
+    function generateFunctions(type) {
+      console.log("Function triggered for: " + type); // Debugging line to ensure the function is triggered
+      const stepsElement = document.getElementById('steps');
+      const functionsTable = document.getElementById('functionsTable');
+      
+      // Clear previous results
+      stepsElement.innerHTML = '';
+      functionsTable.style.display = 'none';
+
+      // Check if the MBTI type exists in the functionMap
+      if (functionMap[type]) {
+        const { steps, functions } = functionMap[type];
+
+        // Display step-by-step breakdown
+        steps.forEach(step => {
+          stepsElement.innerHTML += `<div class="step">${step}</div>`;
+        });
+
+        // Display functions in the table
+        document.getElementById('dominantFunction').textContent = functions.dominant;
+        document.getElementById('auxiliaryFunction').textContent = functions.auxiliary;
+        document.getElementById('tertiaryFunction').textContent = functions.tertiary;
+        document.getElementById('inferiorFunction').textContent = functions.inferior;
+        document.getElementById('opposingFunction').textContent = functions.opposing;
+        document.getElementById('criticalParent').textContent = functions.criticalParent;
+        document.getElementById('trickster').textContent = functions.trickster;
+        document.getElementById('demon').textContent = functions.demon;
+
+        functionsTable.style.display = 'block';
+      } else {
+        stepsElement.innerHTML = '<div class="step">Please select a valid MBTI type.</div>';
+      }
+    }
+
+    // Attach event listeners to buttons
+    document.querySelectorAll('.button').forEach(button => {
+      button.addEventListener('click', () => {
+        generateFunctions(button.id);
+      });
+    });
+  </script>
+
+</body>
+</html>
