@@ -37,14 +37,6 @@
         flex: 1 1 45%;
       }
     }
-    #debugMessage {
-      margin-top: 20px;
-      padding: 10px;
-      background-color: #f8d7da;
-      color: #721c24;
-      border: 1px solid #f5c6cb;
-      display: none;
-    }
   </style>
 </head>
 <body>
@@ -83,22 +75,22 @@
       </tr>
       <tr>
         <td id="dominantFunction">Ni</td>
-        <td>Focuses on internal visions and insights</td>
+        <td id="dominantExplanation">Focuses on internal visions and insights</td>
         <td>Dominant</td>
       </tr>
       <tr>
         <td id="auxiliaryFunction">Te</td>
-        <td>Organizes and structures the external world</td>
+        <td id="auxiliaryExplanation">Organizes and structures the external world</td>
         <td>Auxiliary</td>
       </tr>
       <tr>
         <td id="tertiaryFunction">Fi</td>
-        <td>Evaluates the world based on internal values</td>
+        <td id="tertiaryExplanation">Evaluates the world based on internal values</td>
         <td>Tertiary</td>
       </tr>
       <tr>
         <td id="inferiorFunction">Se</td>
-        <td>Takes in immediate sensory data from the world</td>
+        <td id="inferiorExplanation">Takes in immediate sensory data from the world</td>
         <td>Inferior</td>
       </tr>
     </table>
@@ -112,22 +104,22 @@
       </tr>
       <tr>
         <td id="opposingFunction">Ne</td>
-        <td>Seeks possibilities, patterns, and connections externally</td>
+        <td id="opposingExplanation">Seeks possibilities, patterns, and connections externally</td>
         <td>Opposing</td>
       </tr>
       <tr>
         <td id="criticalParent">Ti</td>
-        <td>Analyzes the world based on internal logic</td>
+        <td id="criticalParentExplanation">Analyzes the world based on internal logic</td>
         <td>Critical Parent</td>
       </tr>
       <tr>
         <td id="trickster">Fe</td>
-        <td>Considers external emotions and social dynamics</td>
+        <td id="tricksterExplanation">Considers external emotions and social dynamics</td>
         <td>Trickster</td>
       </tr>
       <tr>
         <td id="demon">Si</td>
-        <td>Remembers past experiences and draws on sensory memory</td>
+        <td id="opposingExplanation">Remembers past experiences and draws on sensory memory</td>
         <td>Demon</td>
       </tr>
     </table>
@@ -156,6 +148,16 @@
           criticalParent: "Ti",
           trickster: "Fe",
           demon: "Si"
+        },
+        explanations: {
+          dominant: "Focuses on internal visions and insights",
+          auxiliary: "Organizes and structures the external world",
+          tertiary: "Evaluates the world based on internal values",
+          inferior: "Takes in immediate sensory data from the world",
+          opposing: "Seeks possibilities, patterns, and connections externally",
+          criticalParent: "Analyzes the world based on internal logic",
+          trickster: "Considers external emotions and social dynamics",
+          demon: "Remembers past experiences and draws on sensory memory"
         }
       },
       "ENTP": {
@@ -179,31 +181,51 @@
           criticalParent: "Te",
           trickster: "Fi",
           demon: "Se"
+        },
+        explanations: {
+          dominant: "Seeks possibilities, patterns, and connections externally",
+          auxiliary: "Organizes and structures the external world",
+          tertiary: "Considers external emotions and social dynamics",
+          inferior: "Remembers past experiences and draws on sensory memory",
+          opposing: "Focuses on internal visions and insights",
+          criticalParent: "Analyzes the world based on external logic",
+          trickster: "Evaluates the world based on internal values",
+          demon: "Takes in immediate sensory data from the world"
         }
       },
       "ISFJ": {
-    steps: [
-      "Step 1: I (Introverted) → Dominant function = Si (Introverted Sensing)",
-      "Step 2: S (Sensing) → Dominant function = Si (Auxiliary will be Fe, the extraverted counterpart of Sensing)",
-      "Step 3: Tertiary Function = Ti (Introverted Thinking), opposite attitude of Dominant",
-      "Step 4: Inferior Function = Ne (Extraverted Intuition), opposite attitude of Auxiliary",
-      "Step 5: Shadow Functions derived as follows:",
-      "Opposing Function: Ni (Introverted Intuition), opposite attitude of Dominant",
-      "Critical Parent: Te (Extraverted Thinking), opposite attitude of Auxiliary",
-      "Trickster: Fi (Introverted Feeling), opposite attitude of Tertiary",
-      "Demon: Se (Extraverted Sensing), opposite attitude of Inferior"
-    ],
-    functions: {
-      dominant: "Si",
-      auxiliary: "Fe",
-      tertiary: "Ti",
-      inferior: "Ne",
-      opposing: "Ni",
-      criticalParent: "Te",
-      trickster: "Fi",
-      demon: "Se"
-    }
-  },
+        steps: [
+          "Step 1: I (Introverted) → Dominant function = Si (Introverted Sensing)",
+          "Step 2: S (Sensing) → Dominant function = Si (Auxiliary will be Fe, the extraverted counterpart of Sensing)",
+          "Step 3: Tertiary Function = Ti (Introverted Thinking), opposite attitude of Dominant",
+          "Step 4: Inferior Function = Ne (Extraverted Intuition), opposite attitude of Auxiliary",
+          "Step 5: Shadow Functions derived as follows:",
+          "Opposing Function: Ni (Introverted Intuition), opposite attitude of Dominant",
+          "Critical Parent: Te (Extraverted Thinking), opposite attitude of Auxiliary",
+          "Trickster: Fi (Introverted Feeling), opposite attitude of Tertiary",
+          "Demon: Se (Extraverted Sensing), opposite attitude of Inferior"
+        ],
+        functions: {
+          dominant: "Si",
+          auxiliary: "Fe",
+          tertiary: "Ti",
+          inferior: "Ne",
+          opposing: "Ni",
+          criticalParent: "Te",
+          trickster: "Fi",
+          demon: "Se"
+        },
+        explanations: {
+          dominant: "Remembers past experiences and draws on sensory memory",
+          auxiliary: "Considers external emotions and social dynamics",
+          tertiary: "Analyzes the world based on internal logic",
+          inferior: "Seeks possibilities, patterns, and connections externally",
+          opposing: "Focuses on internal visions and insights",
+          criticalParent: "Analyzes the world based on external logic",
+          trickster: "Evaluates the world based on internal values",
+          demon: "Takes in immediate sensory data from the world"
+        }
+      },
       "ISFP": {
         steps: [
           "Step 1: I (Introverted) → Dominant function = Fi (Introverted Feeling)",
@@ -225,6 +247,16 @@
           criticalParent: "Si",
           trickster: "Ti",
           demon: "Ne"
+        },
+        explanations: {
+          dominant: "Evaluates the world based on internal values",
+          auxiliary: "Takes in immediate sensory data from the world",
+          tertiary: "Organizes and structures the external world",
+          inferior: "Focuses on internal visions and insights",
+          opposing: "Considers external emotions and social dynamics",
+          criticalParent: "Remembers past experiences and draws on sensory memory",
+          trickster: "Analyzes the world based on internal logic",
+          demon: "Seeks possibilities, patterns, and connections externally"
         }
       },
       "INFJ": {
@@ -248,6 +280,16 @@
           criticalParent: "Te",
           trickster: "Fi",
           demon: "Si"
+        },
+        explanations: {
+          dominant: "Focuses on internal visions and insights",
+          auxiliary: "Considers external emotions and social dynamics",
+          tertiary: "Analyzes the world based on internal logic",
+          inferior: "Takes in immediate sensory data from the world",
+          opposing: "Seeks possibilities, patterns, and connections externally",
+          criticalParent: "Analyzes the world based on external logic",
+          trickster: "Evaluates the world based on internal values",
+          demon: "Remembers past experiences and draws on sensory memory"
         }
       },
       "INFP": {
@@ -271,6 +313,16 @@
           criticalParent: "Ni",
           trickster: "Ti",
           demon: "Se"
+        },
+        explanations: {
+          dominant: "Evaluates the world based on internal values",
+          auxiliary: "Seeks possibilities, patterns, and connections externally",
+          tertiary: "Organizes and structures the external world",
+          inferior: "Remembers past experiences and draws on sensory memory",
+          opposing: "Considers external emotions and social dynamics",
+          criticalParent: "Focuses on internal visions and insights",
+          trickster: "Analyzes the world based on internal logic",
+          demon: "Takes in immediate sensory data from the world"
         }
       },
       "ESTJ": {
@@ -294,6 +346,16 @@
           criticalParent: "Fe",
           trickster: "Si",
           demon: "Ne"
+        },
+        explanations: {
+          dominant: "Organizes and structures the external world",
+          auxiliary: "Remembers past experiences and draws on sensory memory",
+          tertiary: "Seeks possibilities, patterns, and connections externally",
+          inferior: "Evaluates the world based on internal values",
+          opposing: "Analyzes the world based on internal logic",
+          criticalParent: "Considers external emotions and social dynamics",
+          trickster: "Remembers past experiences and draws on sensory memory",
+          demon: "Takes in immediate sensory data from the world"
         }
       },
       "ESTP": {
@@ -317,6 +379,16 @@
           criticalParent: "Te",
           trickster: "Fi",
           demon: "Ne"
+        },
+        explanations: {
+          dominant: "Takes in immediate sensory data from the world",
+          auxiliary: "Organizes and structures the external world",
+          tertiary: "Considers external emotions and social dynamics",
+          inferior: "Focuses on internal visions and insights",
+          opposing: "Remembers past experiences and draws on sensory memory",
+          criticalParent: "Analyzes the world based on internal logic",
+          trickster: "Evaluates the world based on internal values",
+          demon: "Seeks possibilities, patterns, and connections externally"
         }
       },
       "ESFJ": {
@@ -340,6 +412,16 @@
           criticalParent: "Te",
           trickster: "Si",
           demon: "Ne"
+        },
+        explanations: {
+          dominant: "Considers external emotions and social dynamics",
+          auxiliary: "Remembers past experiences and draws on sensory memory",
+          tertiary: "Seeks possibilities, patterns, and connections externally",
+          inferior: "Evaluates the world based on internal values",
+          opposing: "Focuses on internal visions and insights",
+          criticalParent: "Considers external emotions and social dynamics",
+          trickster: "Remembers past experiences and draws on sensory memory",
+          demon: "Takes in immediate sensory data from the world"
         }
       },
       "ESFP": {
@@ -363,6 +445,16 @@
           criticalParent: "Ti",
           trickster: "Fe",
           demon: "Ne"
+        },
+        explanations: {
+          dominant: "Takes in immediate sensory data from the world",
+          auxiliary: "Evaluates the world based on internal values",
+          tertiary: "Organizes and structures the external world",
+          inferior: "Focuses on internal visions and insights",
+          opposing: "Remembers past experiences and draws on sensory memory",
+          criticalParent: "Analyzes the world based on internal logic",
+          trickster: "Considers external emotions and social dynamics",
+          demon: "Seeks possibilities, patterns, and connections externally"
         }
       },
       "ENFJ": {
@@ -386,6 +478,16 @@
           criticalParent: "Te",
           trickster: "Si",
           demon: "Ne"
+        },
+        explanations: {
+          dominant: "Considers external emotions and social dynamics",
+          auxiliary: "Focuses on internal visions and insights",
+          tertiary: "Takes in immediate sensory data from the world",
+          inferior: "Analyzes the world based on internal logic",
+          opposing: "Evaluates the world based on internal values",
+          criticalParent: "Organizes and structures the external world",
+          trickster: "Remembers past experiences and draws on sensory memory",
+          demon: "Seeks possibilities, patterns, and connections externally"
         }
       },
       "ISTJ": {
@@ -409,6 +511,16 @@
           criticalParent: "Fe",
           trickster: "Ti",
           demon: "Se"
+        },
+        explanations: {
+          dominant: "Remembers past experiences and draws on sensory memory to understand the world",
+          auxiliary: "Organizes and structures the external world, creating practical solutions",
+          tertiary: "Evaluates the world based on internal values and feelings, but often holds them in reserve",
+          inferior: "Seeks possibilities, patterns, and connections externally, but tends to avoid or undervalue this function",
+          opposing: "Focuses on internal visions and insights, but often dismissed or untrusted by the ISTJ",
+          criticalParent: "Considers external emotions and social dynamics, but may struggle with expressing or responding to them",
+          trickster: "Analyzes the world based on internal logic, which is sometimes contradictory to their preferred method of organization",
+          demon: "Takes in immediate sensory data from the world but can feel overwhelmed or distracted by it"
         }
       },
       "ISTP": {
@@ -432,6 +544,16 @@
           criticalParent: "Si",
           trickster: "Fi",
           demon: "Ne"
+        },
+        explanations: {
+          dominant: "Analyzes the world based on internal logic and structure",
+          auxiliary: "Takes in immediate sensory data from the world and reacts to it in the moment",
+          tertiary: "Focuses on internal visions, patterns, and insights, often relating to future outcomes",
+          inferior: "Considers external emotions and social dynamics but may have difficulty expressing them",
+          opposing: "Organizes and structures the external world, but this may be undervalued by the ISTP",
+          criticalParent: "Remembers past experiences and draws on sensory memory, but often dismissed or ignored",
+          trickster: "Evaluates the world based on internal values, which is typically underdeveloped or unreliable for the ISTP",
+          demon: "Seeks possibilities, patterns, and connections externally, which is often not used or is considered overwhelming"
         }
       },
       "INTP": {
@@ -455,6 +577,16 @@
           criticalParent: "Ni",
           trickster: "Fi",
           demon: "Se"
+        },
+        explanations: {
+          dominant: "Analyzes the world based on internal logic",
+          auxiliary: "Seeks possibilities, patterns, and connections externally",
+          tertiary: "Remembers past experiences and draws on sensory memory",
+          inferior: "Considers external emotions and social dynamics",
+          opposing: "Organizes and structures the external world",
+          criticalParent: "Focuses on internal visions and insights",
+          trickster: "Evaluates the world based on internal values",
+          demon: "Takes in immediate sensory data from the world"
         }
       },
       "ENTJ": {
@@ -478,6 +610,16 @@
           criticalParent: "Fe",
           trickster: "Si",
           demon: "Ne"
+        },
+        explanations: {
+          dominant: "Organizes and structures the external world",
+          auxiliary: "Focuses on internal visions and insights",
+          tertiary: "Takes in immediate sensory data from the world",
+          inferior: "Evaluates the world based on internal values",
+          opposing: "Analyzes the world based on internal logic",
+          criticalParent: "Considers external emotions and social dynamics",
+          trickster: "Remembers past experiences and draws on sensory memory",
+          demon: "Seeks possibilities, patterns, and connections externally"
         }
       },
       "ENFP": {
@@ -501,12 +643,21 @@
           criticalParent: "Ti",
           trickster: "Fe",
           demon: "Se"
+        },
+        explanations: {
+          dominant: "Seeks possibilities, patterns, and connections externally",
+          auxiliary: "Evaluates the world based on internal values",
+          tertiary: "Organizes and structures the external world",
+          inferior: "Remembers past experiences and draws on sensory memory",
+          opposing: "Focuses on internal visions and insights",
+          criticalParent: "Analyzes the world based on internal logic",
+          trickster: "Considers external emotions and social dynamics",
+          demon: "Takes in immediate sensory data from the world"
         }
       },
     };
 
     function generateFunctions(type) {
-      console.log("Function triggered for: " + type); // Debugging line to ensure the function is triggered
       const stepsElement = document.getElementById('steps');
       const functionsTable = document.getElementById('functionsTable');
       
@@ -514,9 +665,9 @@
       stepsElement.innerHTML = '';
       functionsTable.style.display = 'none';
 
-      // Check if the MBTI type exists in the functionMap
+      // Check if the MBTI type exists in the functionMap 
       if (functionMap[type]) {
-        const { steps, functions } = functionMap[type];
+        const { steps, functions, explanations } = functionMap[type];
 
         // Display step-by-step breakdown
         steps.forEach(step => {
@@ -525,17 +676,26 @@
 
         // Display functions in the table
         document.getElementById('dominantFunction').textContent = functions.dominant;
+        document.getElementById('dominantExplanation').textContent = explanations.dominant;
         document.getElementById('auxiliaryFunction').textContent = functions.auxiliary;
+        document.getElementById('auxiliaryExplanation').textContent = explanations.auxiliary;
         document.getElementById('tertiaryFunction').textContent = functions.tertiary;
+        document.getElementById('tertiaryExplanation').textContent = explanations.tertiary;
         document.getElementById('inferiorFunction').textContent = functions.inferior;
+        document.getElementById('inferiorExplanation').textContent = explanations.inferior;
         document.getElementById('opposingFunction').textContent = functions.opposing;
+        document.getElementById('opposingExplanation').textContent = explanations.opposing;
         document.getElementById('criticalParent').textContent = functions.criticalParent;
+        document.getElementById('criticalParentExplanation').textContent = explanations.criticalParent;
         document.getElementById('trickster').textContent = functions.trickster;
+        document.getElementById('tricksterExplanation').textContent = explanations.trickster;
         document.getElementById('demon').textContent = functions.demon;
+        document.getElementById('demonExplanation').textContent = explanations.demon;
 
         functionsTable.style.display = 'block';
       } else {
         stepsElement.innerHTML = '<div class="step">Please select a valid MBTI type.</div>';
+        functionsTable.style.display = 'none';
       }
     }
 
