@@ -61,6 +61,9 @@
       <button class="button" id="ISTP">ISTP</button>
     </div>
 
+    <div id="personalityTypeName" style="font-size: 20px; font-weight: bold; margin-top: 20px; margin-bottom: 20px;"></div>
+
+    
     <div class="steps" id="steps">
       <!-- Steps will be dynamically filled here -->
     </div>
@@ -660,10 +663,14 @@
       function generateFunctions(type) {
         const stepsElement = document.getElementById('steps');
         const functionsTable = document.getElementById('functionsTable');
+        const personalityTypeName = document.getElementById('personalityTypeName');
         
         // Clear previous results
         stepsElement.innerHTML = '';
         functionsTable.style.display = 'none';
+
+        // Set the personality type name
+        personalityTypeName.textContent = type;
 
         // Check if the MBTI type exists in the functionMap 
         if (functionMap[type]) {
